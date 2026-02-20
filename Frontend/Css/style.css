@@ -1,0 +1,733 @@
+/* =========================
+   RESET / BASE
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0b2239, #103b5c);
+  color: white;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.menu-lateral {
+  width: 240px;
+  height: 100vh;        /* força altura total */
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+
+  background: rgba(7, 25, 40, 0.9);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+
+}
+.menu-lateral ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-lateral li {
+  margin-bottom: 6px;
+}
+
+.menu-lateral a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.menu-lateral a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+/* Usuário logado */
+
+#usuarioLogado {
+  padding: 12px 0 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* Botão sair */
+
+#logoutBtn {
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+#logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: white;
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.container {
+  flex: 1;
+  padding: 36px;
+  overflow-y: auto;
+}
+
+.container h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.mes-ref {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card h3 {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+.card p {
+  font-size: 30px;
+  margin: 10px 0 0;
+  font-weight: 600;
+}
+
+/* =========================
+   ESCADAS
+========================= */
+
+.escadas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.escada-container {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.escada-container h3 {
+  font-size: 16px;
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+
+.escada {
+  height: 170px;
+  overflow: hidden;
+  position: relative;
+}
+
+.escada ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  animation: subirChamados 18s linear infinite;
+}
+
+.pause-on-hover:hover ul {
+  animation-play-state: paused;
+}
+
+.escada li {
+  font-size: 13px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* =========================
+   GRÁFICOS
+========================= */
+
+.grafico-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.grafico-box {
+  height: 180px;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+
+@keyframes subirChamados {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ===== AJUSTE FINO DOS GRÁFICOS ===== */
+
+.grafico-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grafico-box {
+  width: 100%;
+  height: 160px;   /* controla a altura útil do gráfico */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grafico-box canvas {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.menu-lateral a.ativo {
+  background: rgba(255,255,255,0.10);
+  color: white;
+  position: relative;
+}
+
+.menu-lateral a.ativo::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  border-radius: 4px;
+  background: rgba(99,102,241,0.9);
+}
+
+/* =========================
+   WIKI / CHAT (Premium)
+========================= */
+
+.wiki-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100vh;
+}
+
+/* header da wiki */
+.wiki-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 16px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.wiki-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+}
+
+/* área do chat */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* scrollbar discreta */
+.chat-box::-webkit-scrollbar {
+  width: 10px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.10);
+  border-radius: 12px;
+}
+.chat-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.16);
+}
+
+/* mensagens */
+.msg {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.msg.user {
+  justify-content: flex-end;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* bolhas */
+.bubble {
+  max-width: min(680px, 78%);
+  padding: 12px 14px;
+  border-radius: 16px;
+  line-height: 1.4;
+  font-size: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255,255,255,0.88);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+}
+
+/* user bubble mais “highlight” */
+.msg.user .bubble {
+  background: rgba(99, 102, 241, 0.22);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  color: rgba(255,255,255,0.95);
+}
+
+/* bot bubble */
+.msg.bot .bubble {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* input fixo */
+.chat-input {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+
+  padding: 12px 12px;
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+  font-size: 14px;
+}
+
+.chat-input input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+.chat-input button {
+  border: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  border-radius: 12px;
+
+  background: rgba(99, 102, 241, 0.85);
+  color: white;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.chat-input button:hover {
+  transform: translateY(-1px);
+  background: rgba(99, 102, 241, 0.95);
+}
+
+.chat-input button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .wiki-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .bubble {
+    max-width: 92%;
+  }
+}
+
+/* "Digitando..." */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.75);
+  animation: blink 1s infinite ease-in-out;
+}
+
+.dot:nth-child(2) { animation-delay: 0.12s; }
+.dot:nth-child(3) { animation-delay: 0.24s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+  40% { opacity: 0.95; transform: translateY(-2px); }
+}
+
+.contexto-label {
+  font-size: 12px;
+  margin-top: 4px;
+  opacity: 0.6;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ===== Botão: Limpar contexto (Wiki) ===== */
+.btn-contexto{
+  margin-top: 8px;
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 12px;
+}
+
+.btn-contexto:hover{
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.9);
+}
+
+.btn-contexto:active{
+  transform: scale(0.99);
+}
+
+.wiki-sugestoes{
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.wiki-sugestoes button{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+  border-radius: 20px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 12px;
+}
+
+.wiki-sugestoes button:hover{
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.9);
+}
+
+.wiki-info{
+  border-left: 3px solid rgba(59,130,246,0.9);
+  padding-left: 10px;
+}
+
+.wiki-regra{
+  border-left: 3px solid rgba(34,197,94,0.9);
+  padding-left: 10px;
+}
+
+.wiki-normal{
+  opacity: 0.9;
+}
+
+.msg-time{
+  font-size: 10px;
+  opacity: 0.35;
+  margin-top: 6px;
+  text-align: right;
+}
+
+.wiki-title{
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: .9;
+}
+
+.wiki-workflow{
+  border-left: 3px solid rgba(99,102,241,0.9); /* roxo/índigo */
+  padding-left: 10px;
+}
+/* Apenas a PRIMEIRA logo (Apisul) */
+.menu-lateral > img:first-of-type {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.Logotipo-PD-2-Branco {
+  width: 106px;
+  display: center;
+  padding: 20px;
+  margin-left: 40px;
+  margin-top: auto;   /* empurra tudo pra baixo */
+  margin-bottom: 10px;
+}
+/* =========================
+   CONTROLE DE MÊS
+========================= */
+
+.controle-mes {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.controle-mes button {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 14px;
+}
+
+.controle-mes button:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+
+.controle-mes button:active {
+  transform: scale(0.96);
+}
+
+.controle-mes .mes-ref {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  min-width: 220px;
+  text-align: center;
+}
+/* ============================
+   ADMIN - FORMULÁRIOS / INPUTS / CARDS
+============================ */
+
+/* Container de cada seção (Dashboard e Wiki dentro do admin) */
+.formulario-admin {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 28px;
+  max-width: 620px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* Títulos */
+.formulario-admin h2 {
+  margin: 0 0 18px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Campo (label + input) */
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Inputs */
+.campo input,
+.campo textarea {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: rgba(255,255,255,0.40);
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: rgba(99,102,241,0.50);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Inputs lado a lado */
+.campo.duo {
+  display: flex;
+  gap: 14px;
+}
+
+.campo.duo > div {
+  flex: 1;
+}
+
+/* Botões de ação do admin */
+.formulario-admin button {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+
+  background: rgba(99, 102, 241, 0.85);
+  color: white;
+
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.formulario-admin button:hover {
+  background: rgba(99, 102, 241, 0.95);
+  transform: translateY(-1px);
+}
+
+.formulario-admin button:active {
+  transform: scale(0.98);
+}
+
+/* Mensagem de status */
+#msgDashboard,
+#msgWiki,
+#erroLogin {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Ajuste de rolagem interno no admin */
+.container {
+  overflow-y: auto;
+  padding-bottom: 50px;
+}
+/* ============================
+   GRID DO ADMIN (DOIS BLOCOS)
+============================ */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 26px;
+  margin-top: 28px;
+  width: 100%;
+}
+/* SELECT estilizado igual aos inputs */
+.campo select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(178, 174, 174, 0.95);
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.campo select:focus {
+  border-color: rgba(99,102,241,0.50);
+  background: rgba(255, 255, 255, 0.08);
+}

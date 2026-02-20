@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Overpass", sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f4c75, #3282b8, #bbe1fa);
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================
+   WRAPPER
+========================= */
+.login-wrapper {
+  text-align: center;
+  z-index: 2;
+}
+
+/* =========================
+   LOGO
+========================= */
+.logo {
+  width: 220px;
+  margin-bottom: 25px;
+}
+
+/* =========================
+   CARD LOGIN
+========================= */
+.login-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 40px;
+  border-radius: 18px;
+  width: 340px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.login-container h2 {
+  margin-bottom: 30px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* =========================
+   INPUTS
+========================= */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.login-container input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-container input:focus {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   REMEMBER
+========================= */
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.login-container button {
+  width: 100%;
+  margin: 10px;
+  padding: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* =========================
+   ERRO
+========================= */
+#erro {
+  color: #ff6b6b;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* =========================
+   LOGO PD
+========================= */
+.Logotipo-PD-2-Branco {
+  width: 55px;
+  margin-top: 20px;
+  opacity: 0.85;
+}
+
+/* =========================
+   CANVAS BACKGROUND
+========================= */
+#techCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle at top, #002244, #000814);
+}
+.link-esqueceu {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #8fd4ff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.link-esqueceu:hover {
+  color: #c6e7ff;
+}

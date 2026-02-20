@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Administrativo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Usa o mesmo CSS do dashboard -->
+  <link rel="stylesheet" href="Css/style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- MENU LATERAL -->
+  <aside class="menu-lateral">
+    <img
+      src="https://i.postimg.cc/v83NDfYT/APISUL-TODAS-AS-VERSOES-DO-LOGO-2024-Horizontal-Branca-Fundo-Azul.png"
+      alt="Logo"
+    >
+
+    <ul>
+      <li><a href="Dashboard.html">Início</a></li>
+      <li id="menuWiki"><a href="wiki.html">Wiki</a></li>
+      <li id="admin"><a href="admin.html" class="ativo">Administrador</a></li>
+    </ul>
+
+    <img
+      src="https://i.postimg.cc/5NKTKvDf/Logotipo-PD-2-Branco.png"
+      alt="Logotipo"
+      class="Logotipo-PD-2-Branco"
+    >
+
+    <div id="usuarioLogado"></div>
+
+    <button id="logoutBtn" onclick="logout()">Sair</button>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+    <h1>Painel Administrativo</h1>
+    <p class="subtitulo-admin">
+      Área restrita para usuários <strong>ADM</strong>. Aqui você alimenta o dashboard, a Wiki e a escada de entregas.
+    </p>
+
+    <div class="admin-grid">
+
+      <!-- BLOCO: Dashboard -->
+      <section class="card formulario-admin">
+        <h2>Dashboard • Lançar dados</h2>
+
+        <div class="campo">
+          <label for="dashTipo">Área / Origem</label>
+          <select id="dashTipo">
+            <optgroup label="Áreas principais">
+              <option value="integra">Integra 2.0</option>
+              <option value="apisullog">ApisulLog</option>
+              <option value="frotas">Frotas</option>
+              <option value="integracoes">Integrações</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="dashStatus">Status</label>
+          <select id="dashStatus">
+            <option value="aguardando">Aguardando início</option>
+            <option value="em_atendimento">Em atendimento</option>
+            <option value="backlog">Backlog</option>
+            <option value="encerrado">Concluídos</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="dashMes">Mês de referência</label>
+          <!-- envia YYYY-MM, o backend converte para YYYY-MM-01 -->
+          <input id="dashMes" type="month">
+        </div>
+
+        <div class="campo">
+          <label for="dashQtd">Quantidade</label>
+          <input id="dashQtd" type="number" min="0" placeholder="Ex: 10">
+        </div>
+
+        <div class="campo">
+          <label for="dashObs">Observação (opcional)</label>
+          <input id="dashObs" type="text" placeholder="Ex: Bugs integra, apisullog">
+        </div>
+
+        <button type="button" onclick="salvarDashboard()">Salvar no Dashboard</button>
+        <p id="msgDashboard" class="msg-admin"></p>
+      </section>
+
+      <!-- BLOCO: Wiki -->
+      <section class="card formulario-admin">
+        <h2>Chat • Cadastrar Wiki</h2>
+
+        <div class="campo">
+          <label for="wikiChave">Chave (US, ATD-XX)</label>
+          <input id="wikiChave" placeholder="Ex: US-12345, ATD-XXX">
+        </div>
+
+        <div class="campo">
+          <label for="wikiTitulo">Título</label>
+          <input id="wikiTitulo" placeholder="Ex: Regra de Fora de Rota por distância">
+        </div>
+
+        <div class="campo">
+          <label for="wikiPalavras">Palavras-chave</label>
+          <input
+            id="wikiPalavras"
+            placeholder="Ex: fora de rota, desvio, risco, integra"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="wikiResumo">Resumo (aparece no chat)</label>
+          <textarea
+            id="wikiResumo"
+            rows="3"
+            placeholder="Resumo curto que será mostrado pelo WikiSul no chat..."
+          ></textarea>
+        </div>
+
+        <div class="campo">
+          <label for="wikiConteudo">Conteúdo detalhado</label>
+          <textarea
+            id="wikiConteudo"
+            rows="6"
+            placeholder="Descrição completa da regra, exemplos, consultas SQL, observações..."
+          ></textarea>
+        </div>
+
+        <button type="button" onclick="salvarWiki()">Publicar na Wiki</button>
+        <p id="msgWiki" class="msg-admin"></p>
+      </section>
+
+      <!-- BLOCO: ENTREGAS (ESCADA ROLANTE) -->
+      <section class="card formulario-admin">
+        <h2>Entregas • Semanal</h2>
+
+        <div class="campo">
+          <label for="origemEntrega">Sistema</label>
+          <select id="origemEntrega">
+            <option value="integra">Integra 2.0</option>
+            <option value="apisullog">ApisulLog</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="categoriaEntrega">Tipo</label>
+          <select id="categoriaEntrega">
+            <option value="bug">🐞 Bug</option>
+            <option value="melhoria">✨ Melhoria</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="tituloEntrega">Título da entrega</label>
+          <input
+            id="tituloEntrega"
+            placeholder="Ex: ATD-XXX — Ajuste painel violado"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="dataEntrega">Data</label>
+          <input id="dataEntrega" type="date">
+        </div>
+
+        <button type="button" onclick="salvarEntrega()">Salvar entrega</button>
+        <p id="msgEntrega" class="msg-admin"></p>
+      </section>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- SCRIPTS -->
+<script src="Js/admin.js"></script>
+<script src="Js/auth-admin.js"></script>
+
+</body>
+</html>

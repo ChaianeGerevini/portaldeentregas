@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portal WikiSul - Cadastro</title>
+  <link rel="stylesheet" href="Css/Log.Css">
+</head>
+<body>
+  <canvas id="techCanvas"></canvas>
+
+  <div class="login-wrapper">
+    <img src="https://i.postimg.cc/v83NDfYT/APISUL-TODAS-AS-VERSOES-DO-LOGO-2024-Horizontal-Branca-Fundo-Azul.png" alt="Logo" class="logo">
+
+    <div class="login-container">
+      <h2>Criar conta</h2>
+
+      <input type="text" id="usuario" placeholder="Email">
+      <input type="password" id="senha" placeholder="Senha (mín. 6)">
+      <input type="password" id="senha2" placeholder="Confirmar senha">
+
+      <button onclick="registrar()">Criar conta</button>
+      <button onclick="voltarLogin()">Voltar</button>
+
+      <p id="erro"></p>
+
+      <img src="https://i.postimg.cc/5NKTKvDf/Logotipo-PD-2-Branco.png" alt="Logotipo" class="Logotipo-PD-2-Branco">
+    </div>
+  </div>
+
+  <script src="Js/auth.js"></script>
+  <script src="Js/auth-admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <style>body{visibility:hidden;}</style>
+  <meta charset="UTF-8">
+  <title>WikiSul • Robô do Sistema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+<!-- MENU LATERAL -->
+  <aside class="menu-lateral">
+    <img src="https://i.postimg.cc/v83NDfYT/APISUL-TODAS-AS-VERSOES-DO-LOGO-2024-Horizontal-Branca-Fundo-Azul.png" alt="Logo">
+
+    <ul>
+      <li><a href="Dashboard.html">Início</a></li>
+      <li id="menuWiki"><a href="wiki.html">Wiki</a></li>
+      <li id="admin"><a href="admin.html">Administrador</a></li>
+    </ul>
+
+    <img src="https://i.postimg.cc/5NKTKvDf/Logotipo-PD-2-Branco.png" 
+         alt="Logotipo" 
+         class="Logotipo-PD-2-Branco">
+
+    <div id="usuarioLogado"></div>
+
+    <button id="logoutBtn" onclick="logout()">Sair</button>
+  </aside>
+
+  <main class="container wiki-container">
+
+    <header class="wiki-header">
+      <div>
+        <h1>🤖 WikiSul</h1>
+        <div id="contextoAtivo" class="contexto-label"></div>
+        <button class="btn-contexto" type="button" onclick="limparContexto()">Limpar contexto</button>
+        <button class="btn-contexto" type="button" onclick="limparChat()">Limpar chat</button>
+      </div>
+    </header>
+
+    <section class="chat-box" id="chatBox">
+      <div class="msg bot">
+        <span class="avatar">🤖</span>
+        <div class="bubble">
+          Oi! 👋<br>
+          Sou o <strong>WikiSul</strong>, seu assistente do sistema.<br>
+          Pode perguntar sobre <em>eventos, workflows, regras ou queries</em>.
+        </div>
+      </div>
+    </section>
+
+<div class="wiki-sugestoes">
+  <span>Sugestões:</span>
+  <button onclick="usarSugestao(this)">O que é fora de rota?</button>
+  <button onclick="usarSugestao(this)">Quando ocorre pernoite?</button>
+  <button onclick="usarSugestao(this)">Como funciona workflow?</button>
+</div>
+
+    <footer class="chat-input">
+      <input
+        type="text"
+        id="pergunta"
+        placeholder="Digite sua pergunta..."
+        autocomplete="off"
+      >
+      <button type="button" onclick="enviarPergunta()">Enviar</button>
+    </footer>
+
+  </main>
+
+</div>
+
+<script>
+  (function () {
+    const token = localStorage.getItem("token");
+
+    // 1) Se não tiver token → volta para login
+    if (!token) {
+      window.location.href = "Index.html";  // use o nome exato do arquivo
+      return;
+    }
+
+    // 2) Valida o token no backend
+    fetch("http://localhost:3000/auth/me", {
+      headers: { Authorization: "Bearer " + token }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Token inválido");
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Usuário logado na wiki:", data);
+
+        // Se quiser exibir o email na wiki também:
+        const el = document.getElementById("usuarioLogado");
+        if (el && data?.email) {
+          el.innerText = "👤 " + data.email;
+        }
+
+        // mostra o conteúdo da página após validar
+        document.body.style.visibility = "visible";
+      })
+      .catch(() => {
+        localStorage.removeItem("token");
+        window.location.href = "Index.html";
+      });
+  })();
+</script>
+
+<script src="Js/script-wiki.js"></script>
+<script src="Js/auth-admin.js"></script>
+</body>
+</html>

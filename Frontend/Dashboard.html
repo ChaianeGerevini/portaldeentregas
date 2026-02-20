@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- MENU LATERAL -->
+  <aside class="menu-lateral">
+    <img src="https://i.postimg.cc/v83NDfYT/APISUL-TODAS-AS-VERSOES-DO-LOGO-2024-Horizontal-Branca-Fundo-Azul.png" alt="Logo">
+
+    <ul>
+      <li><a href="Dashboard.html">Início</a></li>
+      <li id="menuWiki"><a href="wiki.html">Wiki</a></li>
+      <li id="admin"><a href="admin.html">Administrador</a></li>
+    </ul>
+
+    <img src="https://i.postimg.cc/5NKTKvDf/Logotipo-PD-2-Branco.png" 
+         alt="Logotipo" 
+         class="Logotipo-PD-2-Branco">
+
+    <div id="usuarioLogado"></div>
+
+    <button id="logoutBtn" onclick="logout()">Sair</button>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container">
+
+    <h1>Dashboard Equipe N2</h1>
+<div class="controle-mes">
+  <button id="mesAnterior">◀</button>
+  <span id="mesRef" class="mes-ref"></span>
+  <button id="mesProximo">▶</button>
+</div>
+
+    <!-- CARDS -->
+    <div class="cards">
+      <div class="card destaque">
+        <h3>Aguardando</h3>
+        <p id="aguardando">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Em Atendimento</h3>
+        <p id="atendimento">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Backlog</h3>
+        <p id="backlog">0</p>
+      </div>
+
+      <div class="card">
+        <h3>Encerrados</h3>
+        <p id="encerrados">0</p>
+      </div>
+    </div>
+
+        <!-- ESCADAS -->
+    <div class="escadas-grid">
+
+      <!-- INTEGRA -->
+      <div class="escada-container">
+        <h3>🚀 Integra 2.0 — Entregas</h3>
+
+        <div class="escada pause-on-hover">
+          <ul id="listaIntegra">
+            <!-- Itens serão carregados via JS a partir da rota /entregas?sistema=integra -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- APISULLOG -->
+      <div class="escada-container">
+        <h3>📦 ApisulLog — Entregas</h3>
+
+        <div class="escada pause-on-hover">
+          <ul id="listaApisullog">
+            <!-- Itens serão carregados via JS a partir da rota /entregas?sistema=apisullog -->
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="cards">
+
+      <div class="card grafico-card">
+        <h3>Backlog por Área</h3>
+        <div class="grafico-box">
+          <canvas id="graficoBacklog"></canvas>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h3>Integra 2.0</h3>
+        <div class="grafico-box">
+          <canvas id="graficoBacklog2"></canvas>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h3>Integrações</h3>
+        <div class="grafico-box">
+          <canvas id="graficoBacklog3"></canvas>
+        </div>
+      </div>
+
+      <div class="card grafico-card">
+        <h3>Frotas</h3>
+        <div class="grafico-box">
+          <canvas id="graficoBacklog4"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="Js/dados-dashboard.js"></script>
+
+<script>
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "Index.html"; // usa o MESMO nome do arquivo de login
+  }
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "Index.html";  // cuidado com maiúscula/minúscula
+  } else {
+    fetch("http://localhost:3000/auth/me", {   // <<<<< AQUI TROCA /me por /auth/me
+      headers: { Authorization: "Bearer " + token }
+    })
+      .then(res => {
+        if (!res.ok) throw new Error();
+        return res.json();
+      })
+      .then(data => {
+        const el = document.getElementById("usuarioLogado");
+        // backend retorna { id, email }
+        if (el && data?.email) {
+          el.innerText = "👤 " + data.email;
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem("token");
+        window.location.href = "Index.html";
+      });
+  }
+</script>
+
+</body>
+</html>
