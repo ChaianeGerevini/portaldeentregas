@@ -40,7 +40,7 @@ async function login() {
       localStorage.removeItem("credenciais");
     }
 
-    window.location.href = "Dashboard.html";
+    window.location.href = "dashboard.html";
   } catch (e) {
     console.error(e);
     erro.innerText = "Falha ao conectar no servidor (backend está rodando?)";
