@@ -1,5 +1,5 @@
 // Js/auth.js
-const API_URL = "http://https://portaldeentregas.onrender.com";
+const API_URL = "https://portaldeentregas.onrender.com";
 
 /* =========================================
    LOGIN
