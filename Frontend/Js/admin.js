@@ -1,5 +1,5 @@
 // Js/admin.js (FRONTEND)
-const API_URL = "http://localhost:3000";
+const API_URL = "https://portaldeentregas.onrender.com";
 
 // -------------------------------------
 // Helpers gerais

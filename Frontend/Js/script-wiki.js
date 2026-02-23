@@ -1,6 +1,6 @@
 // Js/script-wiki.js
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://portaldeentregas.onrender.com";
 
 // -------------------------------
 // Helpers de UI (bolhas no chat)
