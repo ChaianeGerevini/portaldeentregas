@@ -92,7 +92,7 @@ async function registrar() {
     erro.innerText = "Conta criada com sucesso! Redirecionando...";
 
     setTimeout(() => {
-      window.location.href = "Index.html";
+      window.location.href = "index.html";
     }, 1200);
   } catch (e) {
     console.error(e);
@@ -189,7 +189,7 @@ function irCadastro() {
 }
 
 function voltarLogin() {
-  window.location.href = "Index.html";
+  window.location.href = "index.html";
 }
 /* =========================================
    FUNDO TECH ANIMADO (Canvas)

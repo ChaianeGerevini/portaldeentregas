@@ -80,7 +80,7 @@
 
     // 1) Se não tiver token → volta para login
     if (!token) {
-      window.location.href = "Index.html";  // use o nome exato do arquivo
+      window.location.href = "index.html";  // use o nome exato do arquivo
       return;
     }
 
@@ -106,7 +106,7 @@
       })
       .catch(() => {
         localStorage.removeItem("token");
-        window.location.href = "Index.html";
+        window.location.href = "index.html";
       });
   })();
 </script>

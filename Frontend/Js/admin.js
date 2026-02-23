@@ -9,7 +9,7 @@ function getToken() {
 }
 
 function redirectLogin() {
-  window.location.href = "Index.html"; // usa o mesmo nome do arquivo de login
+  window.location.href = "index.html"; // usa o mesmo nome do arquivo de login
 }
 
 function setMsg(id, texto, tipo = "ok") {

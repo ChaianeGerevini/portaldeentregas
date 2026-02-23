@@ -59,7 +59,7 @@ function irParaMesProximo() {
 async function carregarDashboard() {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.href = "Index.html";
+    window.location.href = "index.html";
     return;
   }
 
@@ -325,7 +325,7 @@ function montarGraficos(
 async function carregarEntregasEscadas() {
   const token = localStorage.getItem("token");
   if (!token) {
-    window.location.href = "Index.html";
+    window.location.href = "index.html";
     return;
   }
 
