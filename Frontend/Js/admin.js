@@ -1,6 +1,5 @@
 // Js/admin.js (FRONTEND)
-const API_URL = "https://portaldeentregas.onrender.com";
-
+const API_URL = "https://wikisul.onrender.com";
 // -------------------------------------
 // Helpers gerais
 // -------------------------------------

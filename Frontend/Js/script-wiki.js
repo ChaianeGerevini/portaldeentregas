@@ -1,7 +1,6 @@
 // Js/script-wiki.js
 
-const API_URL = "https://portaldeentregas.onrender.com";
-
+const API_URL = "https://wikisul.onrender.com";
 // -------------------------------
 // Helpers de UI (bolhas no chat)
 // -------------------------------

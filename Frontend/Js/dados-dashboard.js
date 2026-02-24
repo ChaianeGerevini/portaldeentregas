@@ -1,5 +1,4 @@
-const API_URL = "https://portaldeentregas.onrender.com";
-
+const API_URL = "https://wikisul.onrender.com";
 let chart1, chart2, chart3, chart4;
 let dataAtual = new Date();
 
